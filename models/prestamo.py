@@ -1,4 +1,4 @@
-from models.libro
+from models.libro import libro
 class Prestamo:
 
     #Cpnstructor
