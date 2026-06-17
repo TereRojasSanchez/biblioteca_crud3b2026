@@ -1,7 +1,7 @@
 from models.libro import libro
 class Prestamo:
 
-    #Cpnstructor
+    #Constructor
     def __init__(self, id, libro, usuario, fecha_prestamo, fecha_devolución, estado):
         self.id = id
         self.libro = libro
