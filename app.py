@@ -27,10 +27,10 @@ def insertar_libro():
         libro_dao = LibroDAO()
         ultimo_id = libro_dao.obtener_ultimo_id() + 1
         libro = Libro(ultimo_id, titulo, autor, isbn, disponible )
-        libro_dao .insertar(libro)
+        libro_dao.insertar(libro)
         print("Insercion del nuevo libro fue exitosa")
     except Exception as e:
-        print("Error ala insertar el libro")
+        print("Error al insertar el libro")
         print(e)
 
 def actualizar_libro():
@@ -57,6 +57,7 @@ def eliminar_libro():
         libro_dao.obtener_todo()
         id = int(input("Escriba el id del libro a eliminar:"))
         libro_dao.eliminar(id)
+        print(f"El libro {id} ha sido eliminado con éxito")
     except Exception as e:
         print(f"Error al eliminar el libro{id}")
         print(e)

@@ -6,7 +6,19 @@ class LibroDAO:
         conexion = Conexion.obtener_conexion()
         cursor = conexion.cursor()
 
-        cursor.execute("SELECT * FROM libro")
+        sql = """
+        SELECT 
+            l.id,
+            l.titulo,
+            a.nombre AS autor,
+            l.isbn,
+            l.disponible
+        FROM libro l
+        INNER JOIN autor a
+        ON l.autor = a.id
+        """
+
+        cursor.execute(sql)
         registros = cursor.fetchall()
 
         libros = []
@@ -38,7 +50,7 @@ class LibroDAO:
             libro.titulo,
             libro.autor,
             libro.isbn,
-            libro.disponible
+            libro.disponible,
 
         ))
         conexion.commit()
@@ -46,7 +58,7 @@ class LibroDAO:
         conexion.close()
 
         #UPDATE
-        def actualizar(self, libro):
+    def actualizar(self, libro):
             conexion = Conexion.obtener_conexion()
             cursor = conexion.cursor()
 
@@ -69,19 +81,19 @@ class LibroDAO:
             conexion.close()
 
         #DELETE
-        def eliminar(self,id):
+    def eliminar(self,id):
             conexion = Conexion.obtener_conexion()
             cursor = conexion.cursor()
 
-            cursor.execute("DELETE FROM libro WHERE id = %s", (id))
+            cursor.execute("DELETE FROM libro WHERE id = %s", (id,))
 
             conexion.commit()
             cursor.close()
             conexion.close()
 
-        def obtener_iltimo_id(self):
-            conexion = conexion.obtener_conexion()
-            cursor = conexion.cursor 
+    def obtener_ultimo_id(self):
+            conexion = Conexion.obtener_conexion()
+            cursor = conexion.cursor()
 
             cursor.execute("SELECT MAX (id) FROM libro")
             resultado = cursor.fetchone()
