@@ -1,4 +1,7 @@
+import flet as ft
 from dao.libro_dao import LibroDAO
+
+from ui.main_window import main_window
 from models.libro import Libro
 from dao.usuario_dao import UsuarioDAO
 from models.usuario import Usuario
@@ -98,103 +101,105 @@ def menu_usuarios():
             actualizar_usuario()
         case 4:
             eliminar_usuario()
+
+ft.app(target=main_window)
     
         
 
-def main():
-    print("==== BIBLIOTECA UNIVARSITARIA ====")
-    print("Menu de opciones:")
-    print("1. Libros")
-    print("2. usuarios")
-    opcion = int(input("Escribe tu opcion:"))
-    match opcion:
-        case 1: menu_libros()
-        case 2: menu_usuarios()
-    print("Saliendo del sistesma de Biblioteca universitaria .......")
+# def main():
+#     print("==== BIBLIOTECA UNIVARSITARIA ====")
+#     print("Menu de opciones:")
+#     print("1. Libros")
+#     print("2. usuarios")
+#     opcion = int(input("Escribe tu opcion:"))
+#     match opcion:
+#         case 1: menu_libros()
+#         case 2: menu_usuarios()
+#     print("Saliendo del sistesma de Biblioteca universitaria .......")
 
 
 
     
-def ver_usuarios():
-    try:
-        usuario_dao = UsuarioDAO()
-        lista = usuario_dao.obtener_todo()
+# def ver_usuarios():
+#     try:
+#         usuario_dao = UsuarioDAO()
+#         lista = usuario_dao.obtener_todo()
 
-        if len(lista) ==0:
-            print("No hay usuarios registrados")
-        else:
-            for usuario in lista:
-                print(f"id: {usuario.id} {usuario.nombre} {usuario.matricula} {usuario.carrera} {usuario.correo} {usuario.activo}")
-        print("\n Conexion exitosa con la base de datos")
+#         if len(lista) ==0:
+#             print("No hay usuarios registrados")
+#         else:
+#             for usuario in lista:
+#                 print(f"id: {usuario.id} {usuario.nombre} {usuario.matricula} {usuario.carrera} {usuario.correo} {usuario.activo}")
+#         print("\n Conexion exitosa con la base de datos")
 
-    except Exception as e:
-        print("Error")
-        print(e)
+#     except Exception as e:
+#         print("Error")
+#         print(e)
 
-def insertar_usuario():
-    print("INSERTAR UN NUEVO USUARIO")
-    nombre = input("Escribe el nombre del usuario: ")   
-    matricula = (input("Escribe la matricula:  "))
-    carrera = (input("Escribe la carrera: "))
-    correo = input("Ingrese el correo:" )
-    activo = True
-    try:
-        usuario_dao = UsuarioDAO()
-        ultimo_id = usuario_dao.obtener_ultimo_id() + 1
-        usuario = Usuario(ultimo_id, nombre, matricula, carrera, correo, activo )
-        usuario_dao.insertar(usuario)
-        print("Insercion del usuario fue exitosa")
-    except Exception as e:
-        print("Error al insertar usuario")
-        print(e)
+# def insertar_usuario():
+#     print("INSERTAR UN NUEVO USUARIO")
+#     nombre = input("Escribe el nombre del usuario: ")   
+#     matricula = (input("Escribe la matricula:  "))
+#     carrera = (input("Escribe la carrera: "))
+#     correo = input("Ingrese el correo:" )
+#     activo = True
+#     try:
+#         usuario_dao = UsuarioDAO()
+#         ultimo_id = usuario_dao.obtener_ultimo_id() + 1
+#         usuario = Usuario(ultimo_id, nombre, matricula, carrera, correo, activo )
+#         usuario_dao.insertar(usuario)
+#         print("Insercion del usuario fue exitosa")
+#     except Exception as e:
+#         print("Error al insertar usuario")
+#         print(e)
 
-def actualizar_usuario():
-    try:
-        usuario_dao = UsuarioDAO()
+# def actualizar_usuario():
+#     try:
+#         usuario_dao = UsuarioDAO()
 
-        print("Lista de usuarios")
-        lista = usuario_dao.obtener_todo()
+#         print("Lista de usuarios")
+#         lista = usuario_dao.obtener_todo()
 
-        for usuario in lista:
-            print(f"id: {usuario.id} - {usuario.nombre} - {usuario.matricula}")
+#         for usuario in lista:
+#             print(f"id: {usuario.id} - {usuario.nombre} - {usuario.matricula}")
 
-        id = int(input("Seleccione el id del usuario a actualizar: "))
+#         id = int(input("Seleccione el id del usuario a actualizar: "))
        
-        nombre = input("Escribe el nombre: ")
-        matricula = input("Escribe la matricula del usuario")
-        carrera = input("Escribe la carrera: ")
-        correo = input("Escribe el correo: ")
-        activo = True
+#         nombre = input("Escribe el nombre: ")
+#         matricula = input("Escribe la matricula del usuario")
+#         carrera = input("Escribe la carrera: ")
+#         correo = input("Escribe el correo: ")
+#         activo = True
         
 
-        usuario = Usuario(id, nombre,  matricula, carrera, correo, activo)
-        usuario_dao.actualizar(usuario)
+#         usuario = Usuario(id, nombre,  matricula, carrera, correo, activo)
+#         usuario_dao.actualizar(usuario)
 
-        print("El usuario fue actualizado con exito")
+#         print("El usuario fue actualizado con exito")
 
-    except Exception as e:
-        print("ERROR al actualizar usuario")
-        print(e)
+#     except Exception as e:
+#         print("ERROR al actualizar usuario")
+#         print(e)
 
-def eliminar_usuario():
-    try:
-        usuario_dao = UsuarioDAO()
-        print("Lista de usuarios disponibles")
-        lista = usuario_dao.obtener_todo()
-        for usuario in lista:
-            print(f"id: {usuario.id} - {usuario.nombre} - {usuario.matricula}") #Esto se lo añadi de mas yo para que salga la lista de usuarios
-
-
-        usuario_dao.obtener_todo()
-        id = int(input("Escriba el id del usuario a eliminar:"))
-        usuario_dao.eliminar(id)
-        print(f"El usuario {id} ha sido eliminado con éxito")
-    except Exception as e:
-        print(f"Error al eliminar usuario{id}")
-        print(e)
+# def eliminar_usuario():
+#     try:
+#         usuario_dao = UsuarioDAO()
+#         print("Lista de usuarios disponibles")
+#         lista = usuario_dao.obtener_todo()
+#         for usuario in lista:
+#             print(f"id: {usuario.id} - {usuario.nombre} - {usuario.matricula}") #Esto se lo añadi de mas yo para que salga la lista de usuarios
 
 
+#         usuario_dao.obtener_todo()
+#         id = int(input("Escriba el id del usuario a eliminar:"))
+#         usuario_dao.eliminar(id)
+#         print(f"El usuario {id} ha sido eliminado con éxito")
+#     except Exception as e:
+#         print(f"Error al eliminar usuario{id}")
+#         print(e)
 
 
-if __name__ == "__main__":
-    main()
+
+
+# if __name__ == "__main__":
+#     main()
