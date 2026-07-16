@@ -110,7 +110,7 @@ def main_window(page: ft.Page):
     page.window_width = 1100
     page.window_height =700
     page.padding = 0
-    page.bgcolor = "#9c8fb9"
+    page.bgcolor = "#FCFCFD"
 
     #Elementos del contenedor principal 
     titulo = ft.Text(
@@ -125,19 +125,25 @@ def main_window(page: ft.Page):
     )
     #Creacion del contenedor principal 
     contenido = ft.Container(
-        content = ft.Column(
-            controls =[
-                titulo,
-                subtitulo
-            ],
-            spacing = 10,
-        ),
         padding= 30,
         expand = True
     )
 
+    def inicio():
+        return ft.Column(
+            controls =[
+                titulo,
+                subtitulo
+            ],
+            spacing = 10
+        )
+
+    def mostrar_inicio(e=None):
+        contenido.content = inicio()
+        page.update()
+
     def mostrar_formulario_libro(e):
-        contenido.content = libro_form()
+        contenido.content = libro_form(mostrar_inicio)
         page.update()
 
      #crear el menu lateral 
@@ -160,6 +166,12 @@ def main_window(page: ft.Page):
                  ),
                  ft.Divider(color = ft.Colors.BLUE_GREY_700),
                  #Botones
+                 ft.ElevatedButton(
+                     "Inicio",
+                     icon = ft.Icons.HOME,
+                     width = 180,
+                     on_click = mostrar_inicio
+                 ),
                  ft.ElevatedButton(
                    "Libros",
                    icon =ft.Icons.BOOK,
@@ -196,3 +208,5 @@ def main_window(page: ft.Page):
     )
 
     page.add(layout)
+
+    mostrar_inicio() #Mostrar la pantalla de inicio al cargar la aplicacion 
